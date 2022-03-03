@@ -25,7 +25,7 @@ class ImageViewer(tk.Frame):
                 f.write("0")
         
         
-        self.image_num_label = tk.Label(self,text=f"{self.index + 1} / {len(self.images)}",fg="#E3242B")
+        self.image_num_label = tk.Label(self,text=f"{self.index + 1} / {len(self.images)}",bg="#E3242B")
         self.image_num_label.pack(padx=2,pady=2)
 
         self.image_1 = Image.open(self.images[self.index])
