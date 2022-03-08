@@ -6,7 +6,7 @@ from image_viewer import ImageViewer
 class ImageLabelerApp(tk.Tk):
     def __init__(self,*args,**kwargs):
         tk.Tk.__init__(self,*args,**kwargs)
-
+        tk.Tk.title(self,"Image Annotator")
         self.project_path = None
 
         # construct a main container

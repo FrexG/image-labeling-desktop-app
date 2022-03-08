@@ -31,11 +31,11 @@ class RadioGroup(tk.Frame):
             print("Please select a valid answer") 
             label_warning.pack(padx=10,pady=10)
         else:
-            self.updata_image()        
+            self.update_image()        
         finally:
          label_warning.pack_forget()
 
-    def updata_image(self):
+    def update_image(self):
             self.write_annotations_to_file(self.label_val.get(),self.parent.images[self.parent.index])
             self.write_index_to_file(self.parent.index)
             self.parent.index += 1 

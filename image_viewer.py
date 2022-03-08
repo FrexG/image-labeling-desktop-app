@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 from PIL import ImageTk, Image
 from radio_group import RadioGroup
-
+from metadata_input import MetaDataInput
 class ImageViewer(tk.Frame):
     def __init__(self,parent,controller):
         tk.Frame.__init__(self,parent)
@@ -39,7 +39,10 @@ class ImageViewer(tk.Frame):
 
         self.label_image.image = self.image_1_tk
         self.radio_frame = RadioGroup(self)
-        self.radio_frame.pack()
+        self.radio_frame.pack(side=tk.LEFT)
+
+        self.metadata_frame = MetaDataInput(self)
+        self.metadata_frame.pack(side=tk.RIGHT)
 
 
     def display_images(self):
@@ -50,6 +53,7 @@ class ImageViewer(tk.Frame):
             self.label_image.pack_forget()
             self.radio_frame.pack_forget()
             self.image_num_label.pack_forget()
+            self.metadata_frame.pack_forget()
         
             self.image_num_label = tk.Label(self,text=f"{self.index + 1} / {len(self.images)}",fg="#E3242B")
             self.image_num_label.pack(padx=2,pady=2)
@@ -69,7 +73,11 @@ class ImageViewer(tk.Frame):
 
             self.label_image.image = self.image_1_tk
             self.radio_frame = RadioGroup(self)
-            self.radio_frame.pack()
+            self.radio_frame.pack(side=tk.LEFT)
+
+            self.metadata_frame = MetaDataInput(self)
+            self.metadata_frame.pack(side=tk.RIGHT)
+
         
     def end_display(self):
         self.radio_frame.pack_forget()
