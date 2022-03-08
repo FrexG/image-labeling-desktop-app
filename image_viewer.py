@@ -44,6 +44,9 @@ class ImageViewer(tk.Frame):
         self.metadata_frame = MetaDataInput(self)
         self.metadata_frame.pack(side=tk.RIGHT)
 
+        self.submit_btn = tk.Button(self,text="Submit Data",fg="#000",command=lambda:self.insert_data())
+        self.submit_btn.pack(side=tk.BOTTOM)
+
 
     def display_images(self):
         if self.index == len(self.images):
@@ -78,7 +81,31 @@ class ImageViewer(tk.Frame):
             self.metadata_frame = MetaDataInput(self)
             self.metadata_frame.pack(side=tk.RIGHT)
 
-        
+    def insert_data(self):
+        assigned_label = self.radio_frame.get_val()
+        supporting_data = self.metadata_frame.get_values()
+
+        print(supporting_data)
+    
+        self.write_annotations_to_file(assigned_label,supporting_data,self.images[self.index])
+        self.write_index_to_file(self.index)
+        self.index += 1 
+        self.display_images()
+
+
+    def write_index_to_file(self,index):
+        file_name = "saved_index.txt"
+
+        with open(file_name,"w") as f:
+            f.write(str(index))
+
+    def write_annotations_to_file(self,value,support,image):
+        file_name = "labels.txt"
+        sex,age,location = support
+
+        with open(file_name,"a") as f:
+            f.write(f"{','.join([image.split('/')[-1],str(value),sex,age,location])}\n")
+
     def end_display(self):
         self.radio_frame.pack_forget()
         tk.Label(self,text="You're all done!",fg="#000",font=("monospace,24")).pack()
