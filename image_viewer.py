@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+import pandas as pd
 from PIL import ImageTk, Image
 from radio_group import RadioGroup
 from metadata_input import MetaDataInput
@@ -24,7 +25,10 @@ class ImageViewer(tk.Frame):
             with open(file_name,"w") as f:
                 f.write("0")
         
-        
+        if self.index == len(self.images):
+            print(self.index)
+            self.end_display() 
+
         self.image_num_label = tk.Label(self,text=f"{self.index + 1} / {len(self.images)}",bg="#E3242B")
         self.image_num_label.pack(padx=2,pady=2)
 
@@ -62,10 +66,8 @@ class ImageViewer(tk.Frame):
             self.image_num_label.pack(padx=2,pady=2)
 
             # read the image
-            self.image_1 = Image.open(self.images[self.index])
-        
-
-        
+            self.image_1 = Image.open(self.images[self.index])    
+      
             # Resize image
             self.image_1 = self.image_1.resize((640,480))
 
@@ -86,11 +88,13 @@ class ImageViewer(tk.Frame):
         supporting_data = self.metadata_frame.get_values()
 
         print(supporting_data)
-    
-        self.write_annotations_to_file(assigned_label,supporting_data,self.images[self.index])
-        self.write_index_to_file(self.index)
-        self.index += 1 
-        self.display_images()
+        if self.index <= len(self.images):
+            self.write_annotations_to_file(assigned_label,supporting_data,self.images[self.index])
+            self.index += 1 
+            self.write_index_to_file(self.index)    
+            self.display_images()
+        else:
+            self.end_display()
 
 
     def write_index_to_file(self,index):
@@ -108,6 +112,8 @@ class ImageViewer(tk.Frame):
 
     def end_display(self):
         self.radio_frame.pack_forget()
+        self.metadata_frame.pack_forget()
+        self.submit_btn.pack_forget()
         tk.Label(self,text="You're all done!",fg="#000",font=("monospace,24")).pack()
         tk.Label(self,text="THANK YOU!!",bg="#E3242B",font=("Verdana",30)).pack()
     

@@ -5,7 +5,7 @@ class RadioGroup(tk.Frame):
 
         self.parent = parent
 
-        label_radio = tk.Label(self,text="What is the dx of this image ?",bg="#4ADEDE",font=("monospace",16))
+        label_radio = tk.Label(self,text="What is the dx of this image ?",bg="#4ADEDE",font=("Verdana",16))
 
         label_radio.pack(padx=10,pady=10)
 

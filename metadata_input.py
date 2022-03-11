@@ -20,25 +20,25 @@ class MetaDataInput(tk.Frame):
         """ INSERT WIDGETS"""
 
         label = tk.Label(self,text="Supporting Data",fg="#000",font=("monospace",16))
-        label.grid(row=0,column=1,pady=10,sticky=tk.EW)
+        label.grid(row=0,column=0,pady=10,sticky=tk.EW)
 
         sex_label = tk.Label(self,text="Sex: ",fg="#000")
-        sex_label.grid(row=2,column=0,sticky=tk.W)
+        sex_label.grid(row=1,column=0,sticky=tk.W)
         sex_option= tk.OptionMenu(self,self.sex_var,*sex)
         sex_option.config(bg="WHITE",fg="BLACK")
-        sex_option.grid(row=2,column=1,sticky=tk.W)
+        sex_option.grid(row=2,column=0,sticky=tk.W)
 
         age_label = tk.Label(self,text="Age :",fg="#000")
-        age_label.grid(row=4,column=0,sticky=tk.W)
+        age_label.grid(row=3,column=0,sticky=tk.W)
         age_option = tk.OptionMenu(self,self.age_range_var,*age)
         age_option.config(bg="WHITE",fg="BLACK")
-        age_option.grid(row=4,column=1,sticky=tk.W)
+        age_option.grid(row=4,column=0,sticky=tk.W)
 
         location_label = tk.Label(self,text="Symptom location: ",fg="#000")
-        location_label.grid(row=6,column=0,sticky=tk.W)
+        location_label.grid(row=5,column=0,sticky=tk.W)
         location_option= tk.OptionMenu(self,self.location_var,*location)
         location_option.config(bg="WHITE",fg="BLACK")
-        location_option.grid(row=6,column=1,sticky=tk.W)
+        location_option.grid(row=6,column=0,sticky=tk.W)
 
     def get_values(self):
         sex = self.sex_var.get()
