@@ -12,7 +12,7 @@ class ImageLabelerApp(tk.Tk):
         # construct a main container
         self.container = tk.Frame(self)
 
-        self.container.pack(side="top",fill="both",expand=True)
+        self.container.pack(side="top",fill="both",expand=False)
 
         self.container.grid_rowconfigure(0,weight=1)
         self.container.grid_columnconfigure(0,weight=1)
@@ -33,7 +33,6 @@ class ImageLabelerApp(tk.Tk):
         
         self.project_path= filedialog.askdirectory(initialdir="/",title="Select folder")
         frame = ImageViewer(self.container,self)
-
         frame.pack()
         self.show_frame(frame)
 
