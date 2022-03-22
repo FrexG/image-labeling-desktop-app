@@ -59,7 +59,7 @@ class ImageLabelerApp(tk.Tk):
 
 if __name__ == "__main__":
     app = ImageLabelerApp()
-    app.geometry("720x720")
-    app.minsize(720,720)
-    app.maxsize(720,720)
+    app.geometry("1024x1024")
+    #app.minsize(720,720)
+    #app.maxsize(720,720)
     app.mainloop()

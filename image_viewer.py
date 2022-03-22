@@ -35,7 +35,7 @@ class ImageViewer(tk.Frame):
 
         self.image_1 = Image.open(self.images[self.index])
         # Resize image
-        self.image_1 = self.image_1.resize((640,480))
+        self.image_1 = self.image_1.resize((720,540))
 
         self.image_1_tk = ImageTk.PhotoImage(self.image_1.convert('RGB'))
 
@@ -50,7 +50,7 @@ class ImageViewer(tk.Frame):
         self.metadata_frame.pack(side=tk.RIGHT)
 
         self.submit_btn = tk.Button(self,text="Submit Data",fg="#000",justify=tk.LEFT,command=lambda:self.insert_data())
-        self.submit_btn.pack(side=tk.BOTTOM)
+        self.submit_btn.pack(side=tk.BOTTOM,padx=10)
 
     def display_images(self):
         if self.index == len(self.images):
@@ -92,8 +92,8 @@ class ImageViewer(tk.Frame):
          # parameters
         image_id = image.split('/')[-1]
         dx = value
-        sex,age,location = support
-
+        sex,age,family_hist,family_mem_itchy,itch_worsens,location = support
+        data = {"image_id":image_id,"dx":dx,"sex":sex,"age":age,"location":location,"fam_hist_AAR":family_hist,"family_mem_itchy":family_mem_itchy,"itch_worsens_at_neight":itch_worsens}
         """       
          with open(file_name,"a") as f:
             f.write(f"{','.join([image.split('/')[-1],str(value),sex,age,location])}\n")
@@ -101,14 +101,11 @@ class ImageViewer(tk.Frame):
 
         if os.path.exists(file_name):
             df = pd.read_csv(file_name)
-            data = {"image_id":image_id,"dx":dx,"sex":sex,"age":age,"location":location}
             df = df.append(data,ignore_index=True)
             df.to_csv(file_name,index=False)
         else:
             # create a pandas dataframe
-            data = {"image_id":image_id,"dx":dx,"sex":sex,"age":age,"location":location}
-
-            df = pd.DataFrame(columns=("image_id","dx","sex","age","location"))
+            df = pd.DataFrame(columns=("image_id","dx","sex","age","location","fam_hist_AAR","family_mem_itchy",))
             df = df.append(data,ignore_index=True)
 
             df.to_csv(file_name,index=False)
