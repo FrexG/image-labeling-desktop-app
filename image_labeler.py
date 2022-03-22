@@ -7,12 +7,15 @@ class ImageLabelerApp(tk.Tk):
     def __init__(self,*args,**kwargs):
         tk.Tk.__init__(self,*args,**kwargs)
         tk.Tk.title(self,"Image Annotator")
+
         self.project_path = None
+        self.PROJECT_OPENED = False
+        self.frame = None
 
         # construct a main container
         self.container = tk.Frame(self)
 
-        self.container.pack(side="top",fill="both",expand=True)
+        self.container.pack(side="top",fill="both",expand=False)
 
         self.container.grid_rowconfigure(0,weight=1)
         self.container.grid_columnconfigure(0,weight=1)
@@ -30,12 +33,15 @@ class ImageLabelerApp(tk.Tk):
 
 
     def open_new_project(self):
-        
         self.project_path= filedialog.askdirectory(initialdir="/",title="Select folder")
-        frame = ImageViewer(self.container,self)
 
-        frame.pack()
-        self.show_frame(frame)
+        if self.PROJECT_OPENED:
+            self.frame.pack_forget()
+
+        self.PROJECT_OPENED = True
+        self.frame = ImageViewer(self.container,self)
+        self.frame.pack()
+        self.show_frame(self.frame)
 
 
         
@@ -53,5 +59,7 @@ class ImageLabelerApp(tk.Tk):
 
 if __name__ == "__main__":
     app = ImageLabelerApp()
-    app.geometry("720x720")
+    app.geometry("1024x1024")
+    #app.minsize(720,720)
+    #app.maxsize(720,720)
     app.mainloop()
